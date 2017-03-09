@@ -65,9 +65,9 @@ public class CityInformation
 	}
 	
 	// Read folder of city information
-	public static ArrayList<City[]> readFolder(String folder, int numOfCities)
+	public static ArrayList<ArrayList<City>> readFolder(String folder, int numOfCities)
 	{
-		ArrayList<City[]> cityList = new ArrayList<City[]>();
+		ArrayList<ArrayList<City>> cityList = new ArrayList<ArrayList<City>>();
 		
 		try(Stream<Path> paths = Files.walk(Paths.get("/home/you/Desktop"))) 
 		{
@@ -85,10 +85,9 @@ public class CityInformation
 	}
 	
 	// Read the city information
-	public static City[] read(String file, int numOfCities)
+	public static ArrayList<City> read(String file, int numOfCities)
 	{
-		City[] cities = new City[numOfCities];
-		int index = 0;
+		ArrayList<City> cities = new ArrayList<City>();
 		
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));
@@ -106,7 +105,7 @@ public class CityInformation
 		    	int x = Integer.parseInt(str[1]);
 		    	int y = Integer.parseInt(str[2]);
 		    	
-		    	cities[index++] = new City(id, x, y);
+		    	cities.add(new City(id, x, y));
 		    	
 		    	// Go to next line
 		    	line = br.readLine();

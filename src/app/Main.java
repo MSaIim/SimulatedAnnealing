@@ -20,10 +20,8 @@ public class Main
 		
 		// List of cities
 		
-		
-		
-		ArrayList<City> cities = (ArrayList<City>) Arrays.asList(CityInformation.read("cities/c100/c100_01", 100));
-		SimulatedAnnealing tsp = new SimulatedAnnealing(cities, 10000.0, 0.003);
+		ArrayList<City> cities = CityInformation.read("res/cities/c100/c100_01", 100);
+		SimulatedAnnealing tsp = new SimulatedAnnealing(cities, 100.0, 0.003);
 		tsp.run();
 	}
 }
