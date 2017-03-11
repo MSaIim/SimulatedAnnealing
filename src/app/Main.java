@@ -33,7 +33,7 @@ public class Main
 		double temperature = 10000.0;
 		double coolingRate = 0.00003;
 		
-		for(int i = 0; i < 25; i++)
+		for(int i = 0; i < 5; i++)
 		{
 			System.out.print(".");
 			

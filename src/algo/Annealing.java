@@ -28,7 +28,6 @@ public class Annealing
 	{
 		// Get start time
 		long startTime = System.nanoTime();
-		long iterTime = System.nanoTime();
 		
 		// Run algorithm
 		while(this.temperature > 0.1)
@@ -40,12 +39,8 @@ public class Annealing
 			double currentEnergy = this.currentPath.calculatePathDistance();
 			double newEnergy = this.nextPath.calculatePathDistance();
 			
-			// Save time for charts
-			this.stepTime.add((System.nanoTime() - iterTime) / 1000000.0);
-			iterTime = System.nanoTime();
-			
 			// Should we accept new path?
-			if(acceptByProbability(currentEnergy, newEnergy))
+			if(this.acceptByProbability(currentEnergy, newEnergy))
 			{
 				this.currentPath = this.nextPath;
 			}
@@ -61,6 +56,9 @@ public class Annealing
 			
 			// Drop the temperature
 			this.temperature *= (1 - coolingRate);
+			
+			// Save time for charts
+			this.stepTime.add((System.nanoTime() - startTime)/1000000.0);
 		}
 		
 		// End time
