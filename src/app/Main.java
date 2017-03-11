@@ -1,10 +1,10 @@
 package app;
 
+import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import algo.SimulatedAnnealing;
-import city.City;
+import algo.Results;
+import algo.Annealing;
 import city.CityInformation;
 
 public class Main 
@@ -18,10 +18,63 @@ public class Main
 		CityInformation.create(100, "cities/c100");
 		System.out.println("[DONE]");*/
 		
-		// List of cities
+		// List of results
+		@SuppressWarnings("unchecked")
+		ArrayList<Results>[] resultList  = new ArrayList[] { new ArrayList<Results>(),  new ArrayList<Results>(), new ArrayList<Results>(), new ArrayList<Results>()};
 		
-		ArrayList<City> cities = CityInformation.read("res/cities/c100/c100_01", 100);
-		SimulatedAnnealing tsp = new SimulatedAnnealing(cities, 100.0, 0.003);
-		tsp.run();
+		// List of cities
+		File[] c10  = new File("cities/c010").listFiles();
+		File[] c25  = new File("cities/c025").listFiles();
+		File[] c50  = new File("cities/c050").listFiles();
+		File[] c100 = new File("cities/c100").listFiles();
+		
+		// Run algorithm given the files
+		System.out.print("Working ");
+		double temperature = 10000.0;
+		double coolingRate = 0.00003;
+		
+		for(int i = 0; i < 25; i++)
+		{
+			System.out.print(".");
+			
+			// 10 cities
+			Annealing tsp10 = new Annealing(CityInformation.read(c10[i].getPath(), 10), temperature, coolingRate);
+			resultList[0].add(tsp10.run());
+			
+			// 25 cities
+			Annealing tsp25 = new Annealing(CityInformation.read(c25[i].getPath(), 25), temperature, coolingRate);
+			resultList[1].add(tsp25.run());
+			
+			// 50 cities
+			Annealing tsp50 = new Annealing(CityInformation.read(c50[i].getPath(), 50), temperature, coolingRate);
+			resultList[2].add(tsp50.run());
+			
+			// 100 cities
+			Annealing tsp100 = new Annealing(CityInformation.read(c100[i].getPath(), 100), temperature, coolingRate);
+			resultList[3].add(tsp100.run());
+		}
+		System.out.println(" [Done]\n");
+		
+		// Print out results
+		for(int i = 0; i < resultList.length; i++)
+		{
+			double totalTime = 0.0;
+			double totalQuality = 0.0;
+			double totalNodes = 0.0;
+			
+			for(int j = 0; j < resultList[i].size(); j++)
+			{
+				totalTime += resultList[i].get(j).getElapsedTime();
+				totalQuality += resultList[i].get(j).getTotalDistance();
+			}
+			
+			System.out.println("Average Time: " + (totalTime / (double) resultList[i].size()));
+			System.out.println("Average Quality: " + (totalQuality / (double) resultList[i].size()));
+			System.out.println("");
+		}
+		
+		// Create chart
+		Chart chart = new Chart("", resultList[1]);
+		chart.createStepCostChart("Distance Change Over Time");
 	}
 }

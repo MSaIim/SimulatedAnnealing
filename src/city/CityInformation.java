@@ -64,26 +64,6 @@ public class CityInformation
 		}
 	}
 	
-	// Read folder of city information
-	public static ArrayList<ArrayList<City>> readFolder(String folder, int numOfCities)
-	{
-		ArrayList<ArrayList<City>> cityList = new ArrayList<ArrayList<City>>();
-		
-		try(Stream<Path> paths = Files.walk(Paths.get("/home/you/Desktop"))) 
-		{
-		    paths.forEach(filePath -> 
-		    {
-		        if (Files.isRegularFile(filePath))
-		            cityList.add(CityInformation.read(filePath.toString(), numOfCities));
-		    });
-		    
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return cityList;
-	}
-	
 	// Read the city information
 	public static ArrayList<City> read(String file, int numOfCities)
 	{
