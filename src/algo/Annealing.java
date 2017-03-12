@@ -6,7 +6,7 @@ import city.City;
 
 public class Annealing 
 {
-	private double temperature, coolingRate;
+	private double temperature, coolingRate, swapCount;
 	private Path currentPath, nextPath, bestPath;
 	
 	private ArrayList<Double> stepCost;
@@ -16,6 +16,7 @@ public class Annealing
 	{
 		this.temperature = temperature;
 		this.coolingRate = coolingRate;
+		this.swapCount = 0.0;
 		
 		this.currentPath = new Path(cities);
 		this.bestPath = new Path(this.currentPath);
@@ -30,7 +31,7 @@ public class Annealing
 		long startTime = System.nanoTime();
 		
 		// Run algorithm
-		while(this.temperature > 0.1)
+		while(this.temperature > 1.0)
 		{
 			// Get new path
 			this.nextPath = this.currentPath.getNewPath();
@@ -42,6 +43,7 @@ public class Annealing
 			// Should we accept new path?
 			if(this.acceptByProbability(currentEnergy, newEnergy))
 			{
+				this.swapCount++;
 				this.currentPath = this.nextPath;
 			}
 			
@@ -65,7 +67,7 @@ public class Annealing
 		//System.out.println("Final solution time: " + (System.nanoTime() - startTime) / 1000000.0 + "ms");
 		//System.out.println("Final solution distance: " + this.bestPath.calculatePathDistance());
 		
-		return new Results(this.stepCost, this.stepTime, ((System.nanoTime() - startTime) / 1000000.0), this.bestPath.calculatePathDistance());
+		return new Results(this.stepCost, this.stepTime, ((System.nanoTime() - startTime) / 1000000.0), this.bestPath.calculatePathDistance(), this.swapCount);
 	}
 	
 	// See if we should accept the new path

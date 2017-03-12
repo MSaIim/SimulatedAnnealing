@@ -33,10 +33,8 @@ public class Main
 		double temperature = 10000.0;
 		double coolingRate = 0.00003;
 		
-		for(int i = 0; i < 5; i++)
+		for(int i = 0; i < 25; i++)
 		{
-			System.out.print(".");
-			
 			// 10 cities
 			Annealing tsp10 = new Annealing(CityInformation.read(c10[i].getPath(), 10), temperature, coolingRate);
 			resultList[0].add(tsp10.run());
@@ -52,6 +50,9 @@ public class Main
 			// 100 cities
 			Annealing tsp100 = new Annealing(CityInformation.read(c100[i].getPath(), 100), temperature, coolingRate);
 			resultList[3].add(tsp100.run());
+			
+			// Progress
+			System.out.print(".");
 		}
 		System.out.println(" [Done]\n");
 		
@@ -60,16 +61,18 @@ public class Main
 		{
 			double totalTime = 0.0;
 			double totalQuality = 0.0;
-			double totalNodes = 0.0;
+			double totalSwaps = 0.0;
 			
 			for(int j = 0; j < resultList[i].size(); j++)
 			{
 				totalTime += resultList[i].get(j).getElapsedTime();
 				totalQuality += resultList[i].get(j).getTotalDistance();
+				totalSwaps += resultList[i].get(j).getSwapCount();
 			}
 			
 			System.out.println("Average Time: " + (totalTime / (double) resultList[i].size()));
 			System.out.println("Average Quality: " + (totalQuality / (double) resultList[i].size()));
+			System.out.println("Average Swaps: " + (totalSwaps / (double) resultList[i].size()));
 			System.out.println("");
 		}
 		
