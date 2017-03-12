@@ -55,13 +55,13 @@ public class Chart extends ApplicationFrame
 			{
 				// Get the step cost and time
 				double cost = this.resultList.get(i).getStepCost().get(j);
-				double time = this.resultList.get(0).getStepTime().get(j);
+				double time = this.resultList.get(0).getStepTemp().get(j);
 				
 				dataset.addValue(cost, ("C25_" + (i+1)), Double.toString(time));
 			}
 		}
 		
 		// Create chart
-		this.createChart(title, new String[] {"Elapsed Time", "Distance"}, dataset);
+		this.createChart(title, new String[] {"Temperature", "Distance"}, dataset);
 	}
 }

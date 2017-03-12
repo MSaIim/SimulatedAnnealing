@@ -6,14 +6,14 @@ public class Results
 {
 	private double elapsedTime, totalDistance, swapCount;
 	private ArrayList<Double> stepCost;
-	private ArrayList<Double> stepTime;
+	private ArrayList<Double> stepTemp;
 	
-	public Results(ArrayList<Double> stepCost, ArrayList<Double> stepTime, double elapsedTime, double totalDistance, double swapCount)
+	public Results(ArrayList<Double> stepCost, ArrayList<Double> stepTemp, double elapsedTime, double totalDistance, double swapCount)
 	{
 		this.elapsedTime = elapsedTime;
 		this.totalDistance = totalDistance;
 		this.stepCost = stepCost;
-		this.stepTime = stepTime;
+		this.stepTemp = stepTemp;
 		this.swapCount = swapCount;
 	}
 	
@@ -21,5 +21,5 @@ public class Results
 	public double getTotalDistance() { return this.totalDistance; }
 	public double getSwapCount() { return this.swapCount; }
 	public ArrayList<Double> getStepCost() { return this.stepCost; }
-	public ArrayList<Double> getStepTime() { return this.stepTime; }
+	public ArrayList<Double> getStepTemp() { return this.stepTemp; }
 }

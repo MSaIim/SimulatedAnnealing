@@ -30,7 +30,6 @@ public class CityInformation
 				String path = folder + "/c" + numOfCities + "_" + fileNumber;
 				
 				// Create the file
-				
 				try {
 					File file = new File(path);
 					file.createNewFile();

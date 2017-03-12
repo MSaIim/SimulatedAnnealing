@@ -60,21 +60,23 @@ public class Main
 		{
 			double totalTime = 0.0;
 			double totalQuality = 0.0;
-			double totalNodes = 0.0;
+			double totalSwaps = 0.0;
 			
 			for(int j = 0; j < resultList[i].size(); j++)
 			{
 				totalTime += resultList[i].get(j).getElapsedTime();
 				totalQuality += resultList[i].get(j).getTotalDistance();
+				totalSwaps += resultList[i].get(j).getSwapCount();
 			}
 			
 			System.out.println("Average Time: " + (totalTime / (double) resultList[i].size()));
 			System.out.println("Average Quality: " + (totalQuality / (double) resultList[i].size()));
+			System.out.println("Average Swaps: " + (totalSwaps / (double) resultList[i].size()));
 			System.out.println("");
 		}
 		
 		// Create chart
 		Chart chart = new Chart("", resultList[1]);
-		chart.createStepCostChart("Distance Change Over Time");
+		chart.createStepCostChart("Simulated Annealing Traveling Salesman");
 	}
 }

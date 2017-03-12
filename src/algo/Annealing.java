@@ -10,7 +10,7 @@ public class Annealing
 	private Path currentPath, nextPath, bestPath;
 	
 	private ArrayList<Double> stepCost;
-	private ArrayList<Double> stepTime;
+	private ArrayList<Double> stepTemp;
 	
 	public Annealing(ArrayList<City> cities, double temperature, double coolingRate)
 	{
@@ -22,7 +22,7 @@ public class Annealing
 		this.bestPath = new Path(this.currentPath);
 		
 		this.stepCost = new ArrayList<Double>();
-		this.stepTime = new ArrayList<Double>();
+		this.stepTemp = new ArrayList<Double>();
 	}
 	
 	public Results run()
@@ -57,7 +57,7 @@ public class Annealing
 			}
 
 			// Save time for charts
-			this.stepTime.add(this.temperature);
+			this.stepTemp.add(this.temperature);
 			
 			// Drop the temperature
 			this.temperature *= (1 - coolingRate);
@@ -67,7 +67,7 @@ public class Annealing
 		//System.out.println("Final solution time: " + (System.nanoTime() - startTime) / 1000000.0 + "ms");
 		//System.out.println("Final solution distance: " + this.bestPath.calculatePathDistance());
 		
-		return new Results(this.stepCost, this.stepTime, ((System.nanoTime() - startTime) / 1000000.0), this.bestPath.calculatePathDistance(), this.swapCount);
+		return new Results(this.stepCost, this.stepTemp, ((System.nanoTime() - startTime) / 1000000.0), this.bestPath.calculatePathDistance(), this.swapCount);
 	}
 	
 	// See if we should accept the new path
