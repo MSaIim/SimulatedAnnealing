@@ -55,12 +55,12 @@ public class Annealing
 				// Save cost for charts
 				this.stepCost.add(this.bestPath.calculatePathDistance());
 			}
+
+			// Save time for charts
+			this.stepTime.add(this.temperature);
 			
 			// Drop the temperature
 			this.temperature *= (1 - coolingRate);
-			
-			// Save time for charts
-			this.stepTime.add((System.nanoTime() - startTime)/1000000.0);
 		}
 		
 		// End time

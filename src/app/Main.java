@@ -11,12 +11,12 @@ public class Main
 {
 	public static void main(String[] args) 
 	{
-		/*System.out.print("Creating cities......");
-		CityInformation.create(10,  "cities/c010");
-		CityInformation.create(25,  "cities/c025");
-		CityInformation.create(50,  "cities/c050");
-		CityInformation.create(100, "cities/c100");
-		System.out.println("[DONE]");*/
+		//System.out.print("Creating cities......");
+		//CityInformation.create(10,  "cities/c010");
+		//CityInformation.create(25,  "cities/c025");
+		//CityInformation.create(50,  "cities/c050");
+		//CityInformation.create(100, "cities/c100");
+		//System.out.println("[DONE]");
 		
 		// List of results
 		@SuppressWarnings("unchecked")
@@ -33,26 +33,25 @@ public class Main
 		double temperature = 10000.0;
 		double coolingRate = 0.00003;
 		
-		for(int i = 0; i < 25; i++)
+		for(int i = 0; i < 5; i++)
 		{
+			System.out.print(".");
+			
 			// 10 cities
-			Annealing tsp10 = new Annealing(CityInformation.read(c10[i].getPath(), 10), temperature, coolingRate);
-			resultList[0].add(tsp10.run());
+			//Annealing tsp10 = new Annealing(CityInformation.read(c10[i].getPath(), 10), temperature, coolingRate);
+			//resultList[0].add(tsp10.run());
 			
 			// 25 cities
 			Annealing tsp25 = new Annealing(CityInformation.read(c25[i].getPath(), 25), temperature, coolingRate);
 			resultList[1].add(tsp25.run());
 			
 			// 50 cities
-			Annealing tsp50 = new Annealing(CityInformation.read(c50[i].getPath(), 50), temperature, coolingRate);
-			resultList[2].add(tsp50.run());
+			//Annealing tsp50 = new Annealing(CityInformation.read(c50[i].getPath(), 50), temperature, coolingRate);
+			//resultList[2].add(tsp50.run());
 			
 			// 100 cities
-			Annealing tsp100 = new Annealing(CityInformation.read(c100[i].getPath(), 100), temperature, coolingRate);
-			resultList[3].add(tsp100.run());
-			
-			// Progress
-			System.out.print(".");
+			//Annealing tsp100 = new Annealing(CityInformation.read(c100[i].getPath(), 100), temperature, coolingRate);
+			//resultList[3].add(tsp100.run());
 		}
 		System.out.println(" [Done]\n");
 		
@@ -61,18 +60,16 @@ public class Main
 		{
 			double totalTime = 0.0;
 			double totalQuality = 0.0;
-			double totalSwaps = 0.0;
+			double totalNodes = 0.0;
 			
 			for(int j = 0; j < resultList[i].size(); j++)
 			{
 				totalTime += resultList[i].get(j).getElapsedTime();
 				totalQuality += resultList[i].get(j).getTotalDistance();
-				totalSwaps += resultList[i].get(j).getSwapCount();
 			}
 			
 			System.out.println("Average Time: " + (totalTime / (double) resultList[i].size()));
 			System.out.println("Average Quality: " + (totalQuality / (double) resultList[i].size()));
-			System.out.println("Average Swaps: " + (totalSwaps / (double) resultList[i].size()));
 			System.out.println("");
 		}
 		

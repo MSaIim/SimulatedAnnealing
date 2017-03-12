@@ -1,6 +1,7 @@
 package city;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -17,14 +18,28 @@ public class CityInformation
 	{
 		int counter = 0;
 		
+		// Create directory
+		File dir = new File(folder);
+		dir.mkdir();
+		
 		for(int i = 0; i < 25; i++)
 		{
 			try {
 				// Get the file number
 				String fileNumber = (i < 9) ? "0" + Integer.toString((i+1)) : Integer.toString((i+1));
+				String path = folder + "/c" + numOfCities + "_" + fileNumber;
 				
-				// Create a file and list of coords
-				PrintWriter writer = new PrintWriter(folder + "/c" + numOfCities + "_" + fileNumber, "UTF-8");
+				// Create the file
+				
+				try {
+					File file = new File(path);
+					file.createNewFile();
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				PrintWriter writer = new PrintWriter(path, "UTF-8");
 				List<Integer[]> coords = new ArrayList<Integer[]>();
 				
 				// Write number of cities
