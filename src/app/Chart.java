@@ -62,6 +62,6 @@ public class Chart extends ApplicationFrame
 		}
 		
 		// Create chart
-		this.createChart(title, new String[] {"Temperature", "Distance"}, dataset);
+		this.createChart(title, new String[] {"Elapsed Time", "Distance"}, dataset);
 	}
 }
