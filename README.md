@@ -1,7 +1,7 @@
 # ![](http://i.imgur.com/TdcAJHS.png) Simulated Annealing
-This program uses the Simulated Annealing algorithm to get a possible solution back to the traveling salesman problem. We first start off with a temperature of `10000` and a cooling rate of `0.00003`. During each iteration, we swap an edges of two pairs of connected cities and determine if the path is shorter. If not, then we use our value function to either accept or deny the new path in hopes of a optimal path later on as the algorithm runs. After each iteration, we lower the temperature by the cooling rate to stop the algorithm after some time.
+This program uses the Simulated Annealing algorithm to get a possible solution back to the traveling salesman problem. We first start off with a temperature of `10000` and a cooling rate of `0.00003`. During each iteration, we swap the edges of two pairs of connected cities and determine if the path is shorter. If not, then we use our value function to either accept or deny the new path in hopes of a optimal path later on as the algorithm runs. After each iteration, we lower the temperature by the cooling rate to stop the algorithm after some time.
 
-If the temperature is high, there is a higher probability of accepting a suboptimal path after swapping. This probability decreases as the temperature goes down and eventually turns into the Hill Climbing algorithm (only accepting paths that are better). We calculate the probability with the following equation:
+If the temperature is high, there is a higher probability of accepting a suboptimal path after swapping. This probability decreases as the temperature goes down, which eventually turns into the Hill Climbing algorithm (only accepting paths that are better). We calculate the probability with the following equation:
 
 <p align="center">
 <img src="http://i.imgur.com/ogbWsjw.png" />
@@ -20,8 +20,8 @@ CityInformation.create(50,  "cities/c050");
 CityInformation.create(100, "cities/c100");
 System.out.println("[DONE]");
 ```
-Other configuration:
-+ If you wish to change how they are made, then edit `CityInformation.java`. 
+Other configurations:
++ If you wish to change how the cities are made, then edit `CityInformation.java`. 
 + Inside `main()`, you may also set the temperature and cooling rate.
 + The first `for` loop runs the algorithm on the specified cities. Uncomment/comment out the code to run your configuration.
 
