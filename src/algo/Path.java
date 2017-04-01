@@ -80,6 +80,6 @@ public class Path
 		this.path.set(indexTwo, temp);
 	}
 	
-	// Clone the current path
+	// Get the current path
 	public ArrayList<City> getPath() { return this.path; }
 }

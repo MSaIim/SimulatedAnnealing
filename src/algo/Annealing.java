@@ -1,7 +1,6 @@
 package algo;
 
 import java.util.ArrayList;
-
 import city.City;
 
 public class Annealing 
@@ -56,7 +55,7 @@ public class Annealing
 				this.stepCost.add(this.bestPath.calculatePathDistance());
 			}
 
-			// Save time for charts
+			// Save temperature for charts
 			this.stepTemp.add(this.temperature);
 			
 			// Drop the temperature
@@ -83,4 +82,3 @@ public class Annealing
 		}
 	}
 }
-
